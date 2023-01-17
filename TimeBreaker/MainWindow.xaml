@@ -1,0 +1,42 @@
+﻿<Window x:Class="TimeBreaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeBreaker"
+        mc:Ignorable="d"
+        Title="TimeBreaker" Height="450" Width="800"
+        Icon="img/pocket_watch.ico"
+        >
+    <Window.DataContext>
+        <local:ViewModel></local:ViewModel>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image Source="img/clock.jpg" Stretch="Uniform"></Image>
+            <StackPanel Grid.Row="2">
+                <Label x:Name="Status" Content="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label x:Name="Timer" Content="{Binding Path=Time, UpdateSourceTrigger=PropertyChanged}">
+                    </Label>
+                <Button Command="{Binding StartPause}" Content="{Binding Path=StartPauseContent, UpdateSourceTrigger=PropertyChanged}"></Button>
+                <Button Command="{Binding Reset}">Reset</Button>
+                <Button Command="{Binding BreakNowSkip}" Content="{Binding Path=BreakNowSkipContent, UpdateSourceTrigger=PropertyChanged}"></Button>
+            </StackPanel>
+        </Grid>
+        <Button Grid.Column="2" Grid.Row="1">Settings</Button>
+        <Button Grid.Column="2" Grid.Row="2">Git</Button>
+    </Grid>
+</Window>
