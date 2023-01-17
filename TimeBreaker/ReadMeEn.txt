@@ -1,7 +1,7 @@
 This is a program that I write for myself.
 The main function of the program is to remind the user to take a break while working at the computer.
 
-Program functions:
+Future plans:
 - count down the time until the break
 - count down the time until the end of the break
 - pause and run the countdown until the break
