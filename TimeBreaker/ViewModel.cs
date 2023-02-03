@@ -21,6 +21,7 @@ namespace TimeBreaker
         // private static string _pathToSound = "sound\\small-bell-ring-01a.wav";
         private static UnmanagedMemoryStream _preBreakSignal = Properties.Resources.small_bell_ring_01a;
         private static UnmanagedMemoryStream _breakSignal = Properties.Resources.mixkit_home_standard_ding_dong_109;
+        private static UnmanagedMemoryStream _breakEndSignal = Properties.Resources.TD6K_219_Bell_73_SP;
         //private SoundPlayer _player;
         public ViewModel()
         {
@@ -35,7 +36,7 @@ namespace TimeBreaker
 
 
         private static string _workTime = "00:00:32";
-        private static string _breakTime = "00:00:30";
+        private static string _breakTime = "00:00:05";
         private static string _preBreakSignalTime = "00:00:30";
         private static bool _isBreak = false;
 
@@ -77,7 +78,7 @@ namespace TimeBreaker
         //7 Sounds
         //     . 30 seconds before break - DONE
         //  . break signal - DONE
-        //     . break end signal
+        //     . break end signal - DONE
         //     .relaxing music during break
 
 
@@ -184,7 +185,7 @@ namespace TimeBreaker
                 Status = "Working...";
             }
 
-            ///// PreBreakSignal
+            ///// Pre Break Signal
 
             if (Time == _preBreakSignalTime && _isBreak == false)
             {
@@ -201,7 +202,7 @@ namespace TimeBreaker
 
             }
             
-            ///// BreakSignal
+            ///// Break Signal
 
             if ((Time == "00:00:00" && _isBreak == false) || (Time == _breakTime && _isBreak == true))
             {
@@ -217,11 +218,22 @@ namespace TimeBreaker
 
             }
 
+            ///// Break End Signal
+
+            if ((_isBreak == true & Time == "00:00:01"))
+            {
+
+                _breakEndSignal.Position = 0;
+                using (SoundPlayer sound = new SoundPlayer(_breakEndSignal))
+                {
+                    sound.Play();
+                }
+
+            }
+
             int intTime = StringToSeconds(Time);
             intTime--;
             Time = PrintTimeSpan(intTime);
-
-
 
         }
         //public static string PrintTimeSpan(int secs)

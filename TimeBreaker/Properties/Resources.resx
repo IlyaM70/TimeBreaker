@@ -124,4 +124,7 @@
   <data name="small_bell_ring_01a" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sound\small-bell-ring-01a.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TD6K_219_Bell_73_SP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sound\TD6K_219_Bell_73_SP.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

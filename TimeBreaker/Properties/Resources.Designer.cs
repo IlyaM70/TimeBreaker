@@ -77,5 +77,14 @@ namespace TimeBreaker.Properties {
                 return ResourceManager.GetStream("small_bell_ring_01a", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream TD6K_219_Bell_73_SP {
+            get {
+                return ResourceManager.GetStream("TD6K_219_Bell_73_SP", resourceCulture);
+            }
+        }
     }
 }
