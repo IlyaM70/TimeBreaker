@@ -17,7 +17,11 @@ namespace TimeBreaker
         }
 
         private DispatcherTimer _timer;
-        private SoundPlayer _player;
+
+        // private static string _pathToSound = "sound\\small-bell-ring-01a.wav";
+        private static UnmanagedMemoryStream _preBreakSignal = Properties.Resources.small_bell_ring_01a;
+        private static UnmanagedMemoryStream _breakSignal = Properties.Resources.mixkit_home_standard_ding_dong_109;
+        //private SoundPlayer _player;
         public ViewModel()
         {
             //timer
@@ -25,17 +29,19 @@ namespace TimeBreaker
             _timer.Tick += new EventHandler(timer_Tick);
             _timer.Interval = new TimeSpan(0, 0, 1);
             //sound player
-            _player = new SoundPlayer(_pathToSound);
-            _player.Load();
+            //_player = new SoundPlayer();
 
         }
 
 
         private static string _workTime = "00:00:32";
         private static string _breakTime = "00:00:30";
+        private static string _preBreakSignalTime = "00:00:30";
         private static bool _isBreak = false;
-       // private static string _pathToSound = "sound\\small-bell-ring-01a.wav";
-       private static string _pathToSound = Properties.Resources.small_bell_ring_01a;
+
+
+
+        
 
 
         private string _time = _workTime;
@@ -70,7 +76,7 @@ namespace TimeBreaker
         // 6 Merge Buttons - DONE
         //7 Sounds
         //     . 30 seconds before break - DONE
-        //  . break signal
+        //  . break signal - DONE
         //     . break end signal
         //     .relaxing music during break
 
@@ -120,6 +126,8 @@ namespace TimeBreaker
                   Time = _workTime;
                   Status = "TIMER RESETED";
                   StartPauseContent = "Start";
+                  if (_isBreak) _isBreak = false;
+                 
               });
             }
         }
@@ -176,9 +184,37 @@ namespace TimeBreaker
                 Status = "Working...";
             }
 
-            if (Time == "00:00:30" && _isBreak == false)
+            ///// PreBreakSignal
+
+            if (Time == _preBreakSignalTime && _isBreak == false)
             {
-                _player.Play();
+                //_player.Stop();
+                //_player.Stream = _preBreakSignal;
+                //_player.Load();
+                //_player.Play();
+                _preBreakSignal.Position = 0;
+                using (SoundPlayer sound = new SoundPlayer(_preBreakSignal)) {
+                    sound.Play();
+                }
+
+
+
+            }
+            
+            ///// BreakSignal
+
+            if ((Time == "00:00:00" && _isBreak == false) || (Time == _breakTime && _isBreak == true))
+            {
+                //_player.Stop();
+                //_player.Stream = _breakSignal;
+                //_player.Load();
+                //_player.Play();
+                _breakSignal.Position = 0;
+                using (SoundPlayer sound = new SoundPlayer(_breakSignal))
+                {
+                    sound.Play();
+                }
+
             }
 
             int intTime = StringToSeconds(Time);
