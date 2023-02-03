@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Media;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -33,7 +34,8 @@ namespace TimeBreaker
         private static string _workTime = "00:00:32";
         private static string _breakTime = "00:00:30";
         private static bool _isBreak = false;
-        private static string _pathToSound = "C:\\Users\\iliya\\source\\repos\\C#\\TimeBreaker\\TimeBreaker\\sound\\small-bell-ring-01a.wav";
+       // private static string _pathToSound = "sound\\small-bell-ring-01a.wav";
+       private static string _pathToSound = Properties.Resources.small_bell_ring_01a;
 
 
         private string _time = _workTime;
@@ -67,7 +69,7 @@ namespace TimeBreaker
         // 5 Status - DONE
         // 6 Merge Buttons - DONE
         //7 Sounds
-        //     . 30 seconds before break
+        //     . 30 seconds before break - DONE
         //  . break signal
         //     . break end signal
         //     .relaxing music during break
@@ -174,7 +176,7 @@ namespace TimeBreaker
                 Status = "Working...";
             }
 
-            if (Time == "00:30:00" && !_isBreak == true)
+            if (Time == "00:00:30" && _isBreak == false)
             {
                 _player.Play();
             }
