@@ -63,6 +63,24 @@ namespace TimeBreaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream bell_ringing_03a {
+            get {
+                return ResourceManager.GetStream("bell_ringing_03a", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Elevator_music {
+            get {
+                return ResourceManager.GetStream("Elevator_music", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream mixkit_home_standard_ding_dong_109 {
             get {
                 return ResourceManager.GetStream("mixkit_home_standard_ding_dong_109", resourceCulture);

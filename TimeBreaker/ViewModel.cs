@@ -22,6 +22,8 @@ namespace TimeBreaker
         private static UnmanagedMemoryStream _preBreakSignal = Properties.Resources.small_bell_ring_01a;
         private static UnmanagedMemoryStream _breakSignal = Properties.Resources.mixkit_home_standard_ding_dong_109;
         private static UnmanagedMemoryStream _breakEndSignal = Properties.Resources.TD6K_219_Bell_73_SP;
+        private static UnmanagedMemoryStream _breakMusic= Properties.Resources.Elevator_music;
+        private static UnmanagedMemoryStream _testSignal= Properties.Resources.bell_ringing_03a;
         //private SoundPlayer _player;
         public ViewModel()
         {
@@ -36,13 +38,13 @@ namespace TimeBreaker
 
 
         private static string _workTime = "00:00:32";
-        private static string _breakTime = "00:00:05";
+        private static string _breakTime = "00:00:20";
         private static string _preBreakSignalTime = "00:00:30";
         private static bool _isBreak = false;
 
 
 
-        
+
 
 
         private string _time = _workTime;
@@ -79,7 +81,7 @@ namespace TimeBreaker
         //     . 30 seconds before break - DONE
         //  . break signal - DONE
         //     . break end signal - DONE
-        //     .relaxing music during break
+        //     .relaxing music during break - DONE
 
 
         private string _startPauseContent = "Start";
@@ -115,7 +117,7 @@ namespace TimeBreaker
               });
             }
         }
-        
+
         public ICommand Reset
         {
             get
@@ -128,7 +130,7 @@ namespace TimeBreaker
                   Status = "TIMER RESETED";
                   StartPauseContent = "Start";
                   if (_isBreak) _isBreak = false;
-                 
+
               });
             }
         }
@@ -168,7 +170,10 @@ namespace TimeBreaker
               });
             }
         }
-        
+
+
+
+
         private void timer_Tick(object sender, EventArgs e)
         {
             if (Time == "00:00:00" && !_isBreak == true)
@@ -201,7 +206,7 @@ namespace TimeBreaker
 
 
             }
-            
+
             ///// Break Signal
 
             if ((Time == "00:00:00" && _isBreak == false) || (Time == _breakTime && _isBreak == true))
@@ -231,31 +236,52 @@ namespace TimeBreaker
 
             }
 
+            ///// Break Music
+           
+            if ((_isBreak == true & Time == _breakTime))
+            {
+                System.Threading.Thread.Sleep(2000);
+                _breakMusic.Position = 0;
+                using (SoundPlayer sound = new SoundPlayer(_breakMusic))
+                {
+                    sound.PlayLooping();
+                }
+
+            }
+
+
+
             int intTime = StringToSeconds(Time);
             intTime--;
             Time = PrintTimeSpan(intTime);
 
         }
-        //public static string PrintTimeSpan(int secs)
-        //{
-        //    TimeSpan t = TimeSpan.FromSeconds(secs);
-        //    string answer;
-        //    if (t.TotalMinutes < 1.0)
-        //    {
-        //        answer = String.Format("{0}", t.Seconds);
-        //    }
-        //    else if (t.TotalHours < 1.0)
-        //    {
-        //        answer = String.Format("{0}:{1:D2}", t.Minutes, t.Seconds);
-        //    }
-        //    else // more than 1 hour
-        //    {
-        //        answer = String.Format("{0}:{1:D2}:{2:D2}", (int)t.TotalHours, t.Minutes, t.Seconds);
-        //    }
 
-        //    return answer;
-        //}
-        public static string PrintTimeSpan(int secs)
+        
+
+
+
+
+//public static string PrintTimeSpan(int secs)
+//{
+//    TimeSpan t = TimeSpan.FromSeconds(secs);
+//    string answer;
+//    if (t.TotalMinutes < 1.0)
+//    {
+//        answer = String.Format("{0}", t.Seconds);
+//    }
+//    else if (t.TotalHours < 1.0)
+//    {
+//        answer = String.Format("{0}:{1:D2}", t.Minutes, t.Seconds);
+//    }
+//    else // more than 1 hour
+//    {
+//        answer = String.Format("{0}:{1:D2}:{2:D2}", (int)t.TotalHours, t.Minutes, t.Seconds);
+//    }
+
+//    return answer;
+//}
+public static string PrintTimeSpan(int secs)
         {
             TimeSpan t = TimeSpan.FromSeconds(secs);
             string answer;
